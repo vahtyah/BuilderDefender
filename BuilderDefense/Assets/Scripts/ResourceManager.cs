@@ -6,6 +6,7 @@ public class ResourceManager : MonoBehaviour
 {
     public static ResourceManager Instance { get; private set; }
     private Dictionary<ResourceTypeSO, int> _resourceAmountDictionary;
+    public event EventHandler<ResourceTypeSO> AmountChange;
     
     private void Awake()
     {
@@ -40,6 +41,17 @@ public class ResourceManager : MonoBehaviour
     public void AddResource(ResourceTypeSO resourceType, int amount)
     {
         _resourceAmountDictionary[resourceType] += amount;
+        OnAmountChange(resourceType);
         TestLogResourceAmountDictionary();
+    }
+
+    public int GetResourceAmount(ResourceTypeSO resourceType)
+    {
+        return _resourceAmountDictionary[resourceType];
+    }
+
+    protected virtual void OnAmountChange(ResourceTypeSO e)
+    {
+        AmountChange?.Invoke(this, e);
     }
 }

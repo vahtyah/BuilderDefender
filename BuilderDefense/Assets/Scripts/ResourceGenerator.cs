@@ -5,8 +5,6 @@ using UnityEngine.Serialization;
 
 public class ResourceGenerator : MonoBehaviour
 {
-    [SerializeField] private ResourceManager resourceManager;
-    
     private BuildingTypeSO _buildingTypeSo;
     private float _timer;
     private float _timerMax;
