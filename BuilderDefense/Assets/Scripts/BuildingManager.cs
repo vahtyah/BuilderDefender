@@ -1,15 +1,19 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class BuildingManager : MonoBehaviour
 {
-    [SerializeField] private Transform pfWoodHarvester;
-    
     private Camera _mainCamera;
-    
+    private BuildingTypeSO _buildingType;
+    private BuildingTypeListSO _buildingTypeListSo;
+
+    private void Awake()
+    {
+        _buildingTypeListSo = Resources.Load<BuildingTypeListSO>(nameof(BuildingTypeListSO));
+        _buildingType = _buildingTypeListSo.list[0];
+    }
+
     private void Start()
     {
         _mainCamera = Camera.main;
@@ -19,7 +23,7 @@ public class BuildingManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Instantiate(pfWoodHarvester, GetMouseWorldPosition(), Quaternion.identity);
+            Instantiate(_buildingType.prefab, GetMouseWorldPosition(), Quaternion.identity);
         }
     }
 

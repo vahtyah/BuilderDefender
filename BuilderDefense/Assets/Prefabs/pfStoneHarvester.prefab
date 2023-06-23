@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7488331099727810301}
-  - component: {fileID: -1105374228644421249}
-  - component: {fileID: 8697322497484414447}
+  - component: {fileID: -6100653699600560539}
+  - component: {fileID: 2768354290616392681}
   m_Layer: 0
-  m_Name: pfWoodHarvester
+  m_Name: pfStoneHarvester
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,9 +32,9 @@ Transform:
   m_Children:
   - {fileID: 294045412336554309}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-1105374228644421249
+--- !u!114 &-6100653699600560539
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bfebee9fd2941ad813c934f23cc2579, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8697322497484414447
+--- !u!114 &2768354290616392681
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 484bff1fad004ce4a1d62c12dfddfc69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingType: {fileID: 11400000, guid: 9a2354231d0b53e4485ddf0343bd465c, type: 2}
+  buildingType: {fileID: 11400000, guid: 66b16c2f6a1c23f4492f6f2a3b65c08e, type: 2}
 --- !u!1 &2739929523600418153
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,7 +132,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 793ca27a5a3378149aaa12abe85933f4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2263e91ebcd2a254dab5f4caccb4a7af, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
