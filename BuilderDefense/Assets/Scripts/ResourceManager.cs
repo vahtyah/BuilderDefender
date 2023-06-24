@@ -25,8 +25,6 @@ public class ResourceManager : MonoBehaviour
         {
             _resourceAmountDictionary[resourceType] = 0;
         }
-        
-        TestLogResourceAmountDictionary();
     }
 
     private void TestLogResourceAmountDictionary()
@@ -42,7 +40,6 @@ public class ResourceManager : MonoBehaviour
     {
         _resourceAmountDictionary[resourceType] += amount;
         OnAmountChange(resourceType);
-        TestLogResourceAmountDictionary();
     }
 
     public int GetResourceAmount(ResourceTypeSO resourceType)
