@@ -49,6 +49,11 @@ public class BuildingTypeSelectUI : MonoBehaviour
         {
             _preTransformBuildingType.Find("Selected").gameObject.SetActive(false);
         }
+        if (buildingTypeSo == null)
+        {
+            _preTransformBuildingType = null;
+            return;
+        }
         var btnTransform = _btnTransformDictionary[buildingTypeSo];
         btnTransform.Find("Selected").gameObject.SetActive(true);
         _preTransformBuildingType = btnTransform;

@@ -24,7 +24,6 @@ public class BuildingManager : MonoBehaviour
             Destroy(gameObject);
         }
         _buildingTypeListSo = Resources.Load<BuildingTypeListSO>(nameof(BuildingTypeListSO));
-        _activeBuildingType = _buildingTypeListSo.list[0];
     }
 
     private void Start()
@@ -34,19 +33,19 @@ public class BuildingManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject() && _activeBuildingType != null)
         {
-            Instantiate(_activeBuildingType.prefab, GetMouseWorldPosition(), Quaternion.identity);
+            Instantiate(_activeBuildingType.prefab, UtilsClass.GetMouseWorldPosition(), Quaternion.identity);
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            SetActiveBuildingType(null);
         }
     }
+    
 
-    private Vector3 GetMouseWorldPosition()
-    {
-        var mouseWorldPosition = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
-        mouseWorldPosition.z = 0f;
-        return mouseWorldPosition;
-    }
-
+    // ReSharper disable Unity.PerformanceAnalysis
     public void SetActiveBuildingType(BuildingTypeSO buildingType)
     {
         _activeBuildingType = buildingType;
