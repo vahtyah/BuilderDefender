@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ResourceManager : MonoBehaviour
@@ -45,6 +46,30 @@ public class ResourceManager : MonoBehaviour
     public int GetResourceAmount(ResourceTypeSO resourceType)
     {
         return _resourceAmountDictionary[resourceType];
+    }
+
+    public bool CanAfford(ResourceAmount[] resourceAmounts)
+    {
+        foreach (var resourceAmount in resourceAmounts)
+        {
+            if (GetResourceAmount(resourceAmount.resourceType) >= resourceAmount.amount)
+            {
+                
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public void SpendResources(ResourceAmount[] resourceAmounts)
+    {
+        foreach (var resourceAmount in resourceAmounts)
+        {
+            _resourceAmountDictionary[resourceAmount.resourceType] -= resourceAmount.amount;
+        }
     }
 
     protected virtual void OnAmountChange(ResourceTypeSO e)

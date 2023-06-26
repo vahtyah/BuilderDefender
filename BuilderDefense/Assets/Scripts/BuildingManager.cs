@@ -9,7 +9,7 @@ public class BuildingManager : MonoBehaviour
     public static BuildingManager Instance { get; private set; }
 
     public event EventHandler<BuildingTypeSO> SelectBuildingType;
-
+    private ResourceManager _resourceManager;
     private Camera _mainCamera;
     private BuildingTypeSO _activeBuildingType;
     private BuildingTypeListSO _buildingTypeListSo;
@@ -24,6 +24,7 @@ public class BuildingManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        _resourceManager = ResourceManager.Instance;
         _buildingTypeListSo = Resources.Load<BuildingTypeListSO>(nameof(BuildingTypeListSO));
     }
 
@@ -34,9 +35,12 @@ public class BuildingManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject() && _activeBuildingType != null && CanSpawnBuilding(_activeBuildingType, UtilsClass.GetMouseWorldPosition()))
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject() && _activeBuildingType != null 
+            && CanSpawnBuilding(_activeBuildingType, UtilsClass.GetMouseWorldPosition())
+            && _resourceManager.CanAfford(_activeBuildingType.constructionResourceCostArray))
         {
             Instantiate(_activeBuildingType.prefab, UtilsClass.GetMouseWorldPosition(), Quaternion.identity);
+            _resourceManager.SpendResources(_activeBuildingType.constructionResourceCostArray);
         }
 
         if (Input.GetMouseButtonDown(1))
