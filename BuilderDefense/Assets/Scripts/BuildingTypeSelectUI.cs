@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class BuildingTypeSelectUI : MonoBehaviour
 {
+    [SerializeField] private List<BuildingTypeSO> ignoreBuildingTypeList;
+    
     private Dictionary<BuildingTypeSO, Transform> _btnTransformDictionary;
     private BuildingManager _buildingManager;
     private Transform _preTransformBuildingType;
@@ -25,6 +27,7 @@ public class BuildingTypeSelectUI : MonoBehaviour
         var index = 0;
         foreach (var buildingTypeSo in buildingTypeList.list)
         {
+            if(ignoreBuildingTypeList.Contains(buildingTypeSo)) continue;
             var btnTransform = Instantiate(btnTemplate, transform);
             btnTransform.gameObject.SetActive(true);
             btnTransform.Find("Image").GetComponent<Image>().sprite = buildingTypeSo.sprite;

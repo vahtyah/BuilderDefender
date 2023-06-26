@@ -41,6 +41,12 @@ TagManager:
   - name: Background
     uniqueID: 2412719973
     locked: 0
+  - name: Bush
+    uniqueID: 1965072137
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Top
+    uniqueID: 3262560069
     locked: 0

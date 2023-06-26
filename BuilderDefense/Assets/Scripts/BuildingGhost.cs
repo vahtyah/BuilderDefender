@@ -4,12 +4,11 @@ using UnityEngine;
 public class BuildingGhost : MonoBehaviour
 {
     private GameObject _spriteGameObject;
-    private Camera _mainCamera;
     private bool _isShow;
 
     private void Awake()
     {
-        _mainCamera = Camera.main;
+        var resourceNearbyOverlay = transform.Find("ResourceGeneratorOverlay").GetComponent<ResourceNearByOverlay>();
         _spriteGameObject = transform.Find("Sprite").gameObject;
 
         BuildingManager.Instance.SelectBuildingType += (sender, so) =>
@@ -17,10 +16,12 @@ public class BuildingGhost : MonoBehaviour
             if (so == null)
             {
                 Hide();
+                resourceNearbyOverlay.Hide();
             }
             else
             {
                 Show(so.sprite);
+                resourceNearbyOverlay.Show(so.resourceGeneratorData);
             }
         };
 
