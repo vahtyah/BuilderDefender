@@ -8,7 +8,7 @@ public class ResourceManager : MonoBehaviour
     public static ResourceManager Instance { get; private set; }
     private Dictionary<ResourceTypeSO, int> _resourceAmountDictionary;
     public event EventHandler<ResourceTypeSO> AmountChange;
-    
+
     private void Awake()
     {
         if (Instance == null)
@@ -19,7 +19,7 @@ public class ResourceManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
+
         _resourceAmountDictionary = new Dictionary<ResourceTypeSO, int>();
         var resourceTypeList = Resources.Load<ResourceTypeListSO>(nameof(ResourceTypeListSO));
         foreach (var resourceType in resourceTypeList.list)
@@ -54,16 +54,16 @@ public class ResourceManager : MonoBehaviour
         {
             if (GetResourceAmount(resourceAmount.resourceType) >= resourceAmount.amount)
             {
-                
             }
             else
             {
                 return false;
             }
         }
+
         return true;
     }
-    
+
     public void SpendResources(ResourceAmount[] resourceAmounts)
     {
         foreach (var resourceAmount in resourceAmounts)

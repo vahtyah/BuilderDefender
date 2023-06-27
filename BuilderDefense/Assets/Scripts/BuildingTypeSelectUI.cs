@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DefaultNamespace;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,6 +42,18 @@ public class BuildingTypeSelectUI : MonoBehaviour
                 _buildingManager.SetActiveBuildingType(buildingTypeSo);
             });
 
+            // Tooltip
+            var tooltipUI = TooltipUI.Instance;
+            var mouseEnterExitEvents = btnTransform.GetComponent<MouseEnterExitEvents>();
+            mouseEnterExitEvents.MouseEnter += (sender, args) =>
+            {
+                tooltipUI.Show(buildingTypeSo.nameString + "\n" + buildingTypeSo.GetStringConstructionResourceConstArray());
+            };
+            mouseEnterExitEvents.MouseExit += (sender, args) =>
+            {
+                tooltipUI.Hide();
+            };
+            
             _btnTransformDictionary[buildingTypeSo] = btnTransform;
             index++;
         }
