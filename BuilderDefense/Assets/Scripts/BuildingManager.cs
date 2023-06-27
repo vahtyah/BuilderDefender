@@ -8,6 +8,8 @@ public class BuildingManager : MonoBehaviour
 {
     public static BuildingManager Instance { get; private set; }
 
+    [SerializeField] private Building _hqBuilding;
+    
     public event EventHandler<BuildingTypeSO> SelectBuildingType;
     private ResourceManager _resourceManager;
     private Camera _mainCamera;
@@ -60,10 +62,16 @@ public class BuildingManager : MonoBehaviour
             }
         }
 
-
+        
         if (Input.GetMouseButtonDown(1))
         {
             SetActiveBuildingType(null);
+        }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            var enemySpawnPosition = UtilsClass.GetMouseWorldPosition() + UtilsClass.GetRandomDir() * 5f;
+            Enemy.Create(enemySpawnPosition);
         }
     }
 
@@ -118,4 +126,6 @@ public class BuildingManager : MonoBehaviour
         errorMessage = "Too far from any other building!";
         return false;
     }
+
+    public Building HqBuilding => _hqBuilding;
 }
