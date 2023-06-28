@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using DefaultNamespace;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;

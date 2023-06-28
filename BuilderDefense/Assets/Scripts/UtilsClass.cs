@@ -15,4 +15,11 @@ public class UtilsClass
     {
         return new Vector3(Random.Range(-1, 1), Random.Range(-1, 1)).normalized;
     }
+
+    public static float GetAngleFromVector(Vector3 vector)
+    {
+        var radians = Mathf.Atan2(vector.y, vector.x);
+        var degrees = radians * Mathf.Rad2Deg;
+        return degrees;
+    }
 }

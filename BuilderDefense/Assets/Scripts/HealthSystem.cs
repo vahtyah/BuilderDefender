@@ -1,14 +1,19 @@
 ﻿using System;
 using UnityEngine;
 
-public class HealthSystem
+public class HealthSystem : MonoBehaviour
 {
     private int _healthAmount;
-    private int _healthAmountMax;
+    [SerializeField] private int _healthAmountMax;
     public event EventHandler Damaged;
     public event EventHandler Died;
 
-    public HealthSystem(int healthAmountMax)
+    private void Awake()
+    {
+        _healthAmount = _healthAmountMax;
+    }
+
+    public void SetHealthAmount(int healthAmountMax)
     {
         _healthAmountMax = healthAmountMax;
         _healthAmount = _healthAmountMax;

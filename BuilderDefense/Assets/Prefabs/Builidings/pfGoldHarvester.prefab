@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8697322497484414447}
   - component: {fileID: 1985999413009962611}
   - component: {fileID: 191318404813825653}
+  - component: {fileID: 2605487354417363456}
   m_Layer: 0
   m_Name: pfGoldHarvester
   m_TagString: Untagged
@@ -119,6 +120,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 89a58379ad81468e96dc7feb42c5af8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2605487354417363456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1704157766543277429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e32d2b06e85f497885282329cd0b7952, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &239019895232161828
@@ -330,6 +343,10 @@ PrefabInstance:
       propertyPath: building
       value: 
       objectReference: {fileID: 191318404813825653}
+    - target: {fileID: 8919069059895473719, guid: 220bf43273242e24780ffa4d93435b40, type: 3}
+      propertyPath: healthSystem
+      value: 
+      objectReference: {fileID: 2605487354417363456}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Enemy : MonoBehaviour
 {
@@ -11,18 +12,25 @@ public class Enemy : MonoBehaviour
     }
 
 
-    [SerializeField] private float _moveSpeed = 200f;
+    [SerializeField] private float moveSpeed = 200f;
 
+    private HealthSystem _healthSystem;
     private Transform _targetTransform;
     private Rigidbody2D _rigidbody2D;
     private Transform _hqBuildingTransform;
 
     private void Start()
     {
+        _healthSystem = GetComponent<HealthSystem>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _hqBuildingTransform = BuildingManager.Instance.HqBuilding.transform;
         _targetTransform = _hqBuildingTransform;
         StartCoroutine(LookForTargets());
+
+        _healthSystem.Died += (sender, args) =>
+        {
+            Destroy(gameObject);
+        };
     }
 
     private void Update()
@@ -34,7 +42,7 @@ public class Enemy : MonoBehaviour
     {
         if (_targetTransform == null) _targetTransform = _hqBuildingTransform;
         var moveDir = (_targetTransform.position - transform.position).normalized;
-        _rigidbody2D.velocity = moveDir * _moveSpeed;
+        _rigidbody2D.velocity = moveDir * moveSpeed;
     }
 
     private void OnCollisionEnter2D(Collision2D other)

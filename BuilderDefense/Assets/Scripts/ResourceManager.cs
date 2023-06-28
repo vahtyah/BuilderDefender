@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ResourceManager : MonoBehaviour
 {
     public static ResourceManager Instance { get; private set; }
+
+    [SerializeField] private List<ResourceAmount> startingResourceAmounts;
+
     private Dictionary<ResourceTypeSO, int> _resourceAmountDictionary;
     public event EventHandler<ResourceTypeSO> AmountChange;
 
@@ -25,6 +30,11 @@ public class ResourceManager : MonoBehaviour
         foreach (var resourceType in resourceTypeList.list)
         {
             _resourceAmountDictionary[resourceType] = 0;
+        }
+        
+        foreach (var startingResourceAmount in startingResourceAmounts)
+        {
+            _resourceAmountDictionary[startingResourceAmount.resourceType] = startingResourceAmount.amount;
         }
     }
 
