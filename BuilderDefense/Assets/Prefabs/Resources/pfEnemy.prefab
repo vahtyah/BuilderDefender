@@ -288,6 +288,10 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: -1032407227
       objectReference: {fileID: 0}
+    - target: {fileID: 3558319436372859905, guid: bfe9173662a60744d8e84f520a035770, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2daeefa946fa7c04da3d91b8cbeb380a, type: 2}
     - target: {fileID: 3558319436372859911, guid: bfe9173662a60744d8e84f520a035770, type: 3}
       propertyPath: m_Name
       value: pfEnemyVisual

@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 6643392366055165931}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &2388276179391781294
 BoxCollider2D:
@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d635312e70dd46e4a01bb450a8e9659d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 20
 --- !u!1 &6061799052669681729
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,7 +173,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 77c835b8517188942a29358cc7496587, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
