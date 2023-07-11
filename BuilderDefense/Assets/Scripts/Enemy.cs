@@ -27,10 +27,7 @@ public class Enemy : MonoBehaviour
         _targetTransform = _hqBuildingTransform;
         StartCoroutine(LookForTargets());
 
-        _healthSystem.Died += (sender, args) =>
-        {
-            Destroy(gameObject);
-        };
+        _healthSystem.Died += (sender, args) => { Destroy(gameObject); };
     }
 
     private void Update()
@@ -40,7 +37,7 @@ public class Enemy : MonoBehaviour
 
     private void HandleMovement()
     {
-        if (_targetTransform == null) _targetTransform = _hqBuildingTransform;
+        if (_targetTransform == null) return;
         var moveDir = (_targetTransform.position - transform.position).normalized;
         _rigidbody2D.velocity = moveDir * moveSpeed;
     }
@@ -72,6 +69,8 @@ public class Enemy : MonoBehaviour
                          Vector3.Distance(transform.position, _targetTransform.position))
                     _targetTransform = building.transform;
             }
+
+            if (_targetTransform == null && _hqBuildingTransform != null) _targetTransform = _hqBuildingTransform;
 
             yield return new WaitForSeconds(.5f);
         }
