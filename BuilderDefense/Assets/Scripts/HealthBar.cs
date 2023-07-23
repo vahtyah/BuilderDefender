@@ -12,6 +12,7 @@ public class HealthBar : MonoBehaviour
         _barTransform = transform.Find("bar");
         UpdateBar();
         healthSystem.Damaged += (sender, args) => { UpdateBar(); };
+        healthSystem.Healed += (sender, args) => { UpdateBar(); };
     }
 
     private void UpdateBar()
