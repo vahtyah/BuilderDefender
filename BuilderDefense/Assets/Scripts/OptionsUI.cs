@@ -35,7 +35,11 @@ public class OptionsUI : MonoBehaviour
             _musicManager.DecreaseVolume();
             UpdateMusicVolumeText();
         });
-        transform.Find("mainMenuBtn").GetComponent<Button>().onClick.AddListener(() => { });
+        transform.Find("mainMenuBtn").GetComponent<Button>().onClick.AddListener(() =>
+        {
+            Time.timeScale = 1;
+            GameSceneManager.Load(GameSceneManager.Scene.MainMenuScene);
+        });
     }
 
     private void Start()
