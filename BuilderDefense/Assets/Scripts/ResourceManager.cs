@@ -74,11 +74,13 @@ public class ResourceManager : MonoBehaviour
         return true;
     }
 
+    // ReSharper disable Unity.PerformanceAnalysis
     public void SpendResources(ResourceAmount[] resourceAmounts)
     {
         foreach (var resourceAmount in resourceAmounts)
         {
             _resourceAmountDictionary[resourceAmount.resourceType] -= resourceAmount.amount;
+            OnAmountChange(resourceAmount.resourceType);
         }
     }
 

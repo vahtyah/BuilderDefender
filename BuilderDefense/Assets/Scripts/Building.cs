@@ -6,21 +6,34 @@ public class Building : MonoBehaviour
     private HealthSystem _healthSystem;
     private Transform _buildingDemolishBtn;
     private Transform _buildingRepairBtn;
+    private SoundManager _soundManager;
 
     public HealthSystem HealthSystem => _healthSystem;
 
     private void Awake()
     {
+        //Variable
         _buildingDemolishBtn = transform.Find("pfBuildingDemolishBtn");
         _buildingRepairBtn = transform.Find("pfBuildingRepairBtn");
+        _soundManager = SoundManager.Instance;
+        _healthSystem = GetComponent<HealthSystem>();
+        var buildingType = GetComponent<BuildingTypeHolder>().buildingType;
+        _healthSystem.SetHealthAmount(buildingType.healthAmountMax);
+        
+        //Setup
         HideBuildingDemolishBtn();
         HideBuildingRepairBtn();
-
-        var buildingType = GetComponent<BuildingTypeHolder>().buildingType;
-        _healthSystem = GetComponent<HealthSystem>();
-        _healthSystem.SetHealthAmount(buildingType.healthAmountMax);
-        _healthSystem.Died += (sender, args) => { Destroy(gameObject); };
-        _healthSystem.Damaged += (sender, args) => { ShowBuildingRepairBtn(); };
+        
+        _healthSystem.Died += (sender, args) =>
+        {
+            Destroy(gameObject);
+            _soundManager.PlaySound(SoundManager.Sound.BuildingDestroyed);
+        };
+        _healthSystem.Damaged += (sender, args) =>
+        {
+            ShowBuildingRepairBtn(); 
+                _soundManager.PlaySound(SoundManager.Sound.BuildingDamaged);
+        };
         _healthSystem.Healed += (sender, args) =>
         {
             if (_healthSystem.IsFullHealth())

@@ -18,16 +18,26 @@ public class Enemy : MonoBehaviour
     private Transform _targetTransform;
     private Rigidbody2D _rigidbody2D;
     private Transform _hqBuildingTransform;
+    private SoundManager _soundManager;
 
     private void Start()
     {
         _healthSystem = GetComponent<HealthSystem>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _soundManager = SoundManager.Instance;
         _hqBuildingTransform = BuildingManager.Instance.HqBuilding.transform;
         _targetTransform = _hqBuildingTransform;
         StartCoroutine(LookForTargets());
 
-        _healthSystem.Died += (sender, args) => { Destroy(gameObject); };
+        _healthSystem.Died += (sender, args) =>
+        {
+            Destroy(gameObject);
+            _soundManager.PlaySound(SoundManager.Sound.EnemyDie);
+        };
+        _healthSystem.Damaged += (sender, args) =>
+        {
+            _soundManager.PlaySound(SoundManager.Sound.EnemyHit);
+        };
     }
 
     private void Update()

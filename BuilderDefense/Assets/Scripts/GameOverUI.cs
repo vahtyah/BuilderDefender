@@ -13,6 +13,7 @@ public class GameOverUI : MonoBehaviour
         _hqBuilding.GetComponent<HealthSystem>().Died += (sender, args) =>
         {
             Show();
+            SoundManager.Instance.PlaySound(SoundManager.Sound.GameOver);
         };
         transform.Find("retryBtn").GetComponent<Button>().onClick.AddListener(() =>
         {

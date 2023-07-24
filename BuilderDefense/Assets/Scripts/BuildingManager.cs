@@ -11,6 +11,7 @@ public class BuildingManager : MonoBehaviour
     
     public event EventHandler<BuildingTypeSO> SelectBuildingType;
     private ResourceManager _resourceManager;
+    private SoundManager _soundManager;
     private Camera _mainCamera;
     private BuildingTypeSO _activeBuildingType;
     private BuildingTypeListSO _buildingTypeListSo;
@@ -19,16 +20,13 @@ public class BuildingManager : MonoBehaviour
     private void Awake()
     {
         if (Instance == null)
-        {
             Instance = this;
-        }
         else
-        {
             Destroy(gameObject);
-        }
 
         _tooltipUI = TooltipUI.Instance;
         _resourceManager = ResourceManager.Instance;
+        _soundManager = SoundManager.Instance;
         _buildingTypeListSo = Resources.Load<BuildingTypeListSO>(nameof(BuildingTypeListSO));
     }
 
@@ -49,6 +47,7 @@ public class BuildingManager : MonoBehaviour
                     BuildingConstruction.Create(UtilsClass.GetMouseWorldPosition(),_activeBuildingType);
                     // Instantiate(_activeBuildingType.prefab, UtilsClass.GetMouseWorldPosition(), Quaternion.identity);
                     _resourceManager.SpendResources(_activeBuildingType.constructionResourceCostArray);
+                    _soundManager.PlaySound(SoundManager.Sound.BuildingPlaced);
                 }
                 else
                 {
@@ -68,7 +67,6 @@ public class BuildingManager : MonoBehaviour
             SetActiveBuildingType(null);
         }
     }
-
 
     // ReSharper disable Unity.PerformanceAnalysis
     public void SetActiveBuildingType(BuildingTypeSO buildingType)

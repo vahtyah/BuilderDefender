@@ -8,16 +8,14 @@ public class ResourceUI : MonoBehaviour
 {
     private ResourceManager _resourceManager;
     private Dictionary<ResourceTypeSO, Transform> _resourceTransformDictionary;
+
     private void Awake()
     {
         _resourceManager = ResourceManager.Instance;
         _resourceTransformDictionary = new Dictionary<ResourceTypeSO, Transform>();
-        
-        _resourceManager.AmountChange += (sender, so) =>
-        {
-            UpdateResourceAmount(so);
-        };
-        
+
+        _resourceManager.AmountChange += (sender, so) => { UpdateResourceAmount(so); };
+
         var resourceTypeList = Resources.Load<ResourceTypeListSO>(nameof(ResourceTypeListSO));
         var resourceTemplate = transform.Find("ResourceTemplate");
         resourceTemplate.gameObject.SetActive(false);

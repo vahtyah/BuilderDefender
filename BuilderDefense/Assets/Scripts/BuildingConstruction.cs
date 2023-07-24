@@ -19,9 +19,11 @@ public class BuildingConstruction : MonoBehaviour
     private BoxCollider2D _boxCollider2D;
     private BuildingTypeHolder _buildingTypeHolder;
     private Material _constructionMaterial;
+    private SoundManager _soundManager;
 
     private void Awake()
     {
+        _soundManager = SoundManager.Instance;
         _spriteRenderer = transform.Find("sprite").GetComponent<SpriteRenderer>();
         _boxCollider2D = GetComponent<BoxCollider2D>();
         _buildingTypeHolder = GetComponent<BuildingTypeHolder>();
@@ -35,6 +37,7 @@ public class BuildingConstruction : MonoBehaviour
         if (_constructionTimer <= 0)
         {
             Instantiate(_buildingType.prefab, transform.position, Quaternion.identity);
+            _soundManager.PlaySound(SoundManager.Sound.BuildingPlaced);
             Destroy(gameObject);
         }
     }
