@@ -5,7 +5,7 @@ public class ArrowProjectile : MonoBehaviour
 {
     public static ArrowProjectile Create(Enemy targetEnemy, Vector3 position)
     {
-        var pdfArrowProjectile = Resources.Load<Transform>("pfArrowProjectile");
+        var pdfArrowProjectile = GameAssets.Instance.pfArrowProjectile;
         var arrowProjectile = Instantiate(pdfArrowProjectile, position, Quaternion.identity)
             .GetComponent<ArrowProjectile>();
         arrowProjectile.SetTarget(targetEnemy);

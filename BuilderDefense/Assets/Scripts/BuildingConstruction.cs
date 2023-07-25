@@ -5,7 +5,7 @@ public class BuildingConstruction : MonoBehaviour
 {
     public static BuildingConstruction Create(Vector3 position, BuildingTypeSO buildingType)
     {
-        var pfBuildingConstruction = Resources.Load<Transform>("pfBuildingConstruction");
+        var pfBuildingConstruction = GameAssets.Instance.pfBuildingConstruction;
         var buildingConstruction = Instantiate(pfBuildingConstruction, position, Quaternion.identity)
             .GetComponent<BuildingConstruction>();
         buildingConstruction.Setup(buildingType);
@@ -20,6 +20,7 @@ public class BuildingConstruction : MonoBehaviour
     private BuildingTypeHolder _buildingTypeHolder;
     private Material _constructionMaterial;
     private SoundManager _soundManager;
+    private Transform _effectBuilding;
 
     private void Awake()
     {
@@ -28,6 +29,8 @@ public class BuildingConstruction : MonoBehaviour
         _boxCollider2D = GetComponent<BoxCollider2D>();
         _buildingTypeHolder = GetComponent<BuildingTypeHolder>();
         _constructionMaterial = _spriteRenderer.material;
+        _effectBuilding = GameAssets.Instance.pfBuildingPlacedParticles;
+        Instantiate(_effectBuilding, transform.position, Quaternion.identity);
     }
 
     private void Update()
@@ -36,7 +39,9 @@ public class BuildingConstruction : MonoBehaviour
         _constructionMaterial.SetFloat("_Progress",GetConstructionTimerNormalized());
         if (_constructionTimer <= 0)
         {
-            Instantiate(_buildingType.prefab, transform.position, Quaternion.identity);
+            var position = transform.position;
+            Instantiate(_buildingType.prefab, position, Quaternion.identity);
+            Instantiate(_effectBuilding, position, Quaternion.identity);
             _soundManager.PlaySound(SoundManager.Sound.BuildingPlaced);
             Destroy(gameObject);
         }

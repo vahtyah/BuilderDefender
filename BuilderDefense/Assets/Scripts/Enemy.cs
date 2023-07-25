@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
 {
     public static Enemy Create(Vector3 position)
     {
-        var pdfEnemy = Resources.Load<Transform>("pfEnemy");
+        var pdfEnemy = GameAssets.Instance.pfEnemy;
         return Instantiate(pdfEnemy, position, Quaternion.identity).GetComponent<Enemy>();
     }
 
@@ -19,24 +19,30 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private Transform _hqBuildingTransform;
     private SoundManager _soundManager;
+    private Transform _effectDie;
 
     private void Start()
     {
+        _effectDie = GameAssets.Instance.pfEnemyDieParticles;
         _healthSystem = GetComponent<HealthSystem>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _soundManager = SoundManager.Instance;
         _hqBuildingTransform = BuildingManager.Instance.HqBuilding.transform;
         _targetTransform = _hqBuildingTransform;
         StartCoroutine(LookForTargets());
-
         _healthSystem.Died += (sender, args) =>
         {
             Destroy(gameObject);
             _soundManager.PlaySound(SoundManager.Sound.EnemyDie);
+            Instantiate(_effectDie, transform.position, Quaternion.identity);
+            CinemachineSnake.Instance.SnakeCamera(7f,.15f);
+            ChromaticAberration.Instance.SetWeight(.5f);
         };
         _healthSystem.Damaged += (sender, args) =>
         {
-            _soundManager.PlaySound(SoundManager.Sound.EnemyHit);
+            _soundManager.PlaySound(SoundManager.Sound.EnemyHit); 
+            CinemachineSnake.Instance.SnakeCamera(5f,.1f);
+            ChromaticAberration.Instance.SetWeight(.5f);
         };
     }
 

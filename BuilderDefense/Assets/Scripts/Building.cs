@@ -19,20 +19,27 @@ public class Building : MonoBehaviour
         _healthSystem = GetComponent<HealthSystem>();
         var buildingType = GetComponent<BuildingTypeHolder>().buildingType;
         _healthSystem.SetHealthAmount(buildingType.healthAmountMax);
-        
+
         //Setup
         HideBuildingDemolishBtn();
         HideBuildingRepairBtn();
-        
+
         _healthSystem.Died += (sender, args) =>
         {
             Destroy(gameObject);
+            Instantiate(GameAssets.Instance.pfBuildingDestroyedParticles, transform.position,
+                Quaternion.identity);
             _soundManager.PlaySound(SoundManager.Sound.BuildingDestroyed);
+            CinemachineSnake.Instance.SnakeCamera(10f,.2f);
+            ChromaticAberration.Instance.SetWeight(1f);
+
         };
         _healthSystem.Damaged += (sender, args) =>
         {
-            ShowBuildingRepairBtn(); 
-                _soundManager.PlaySound(SoundManager.Sound.BuildingDamaged);
+            ShowBuildingRepairBtn();
+            _soundManager.PlaySound(SoundManager.Sound.BuildingDamaged);
+            CinemachineSnake.Instance.SnakeCamera(7f,.15f);
+            ChromaticAberration.Instance.SetWeight(1f);
         };
         _healthSystem.Healed += (sender, args) =>
         {
@@ -66,7 +73,7 @@ public class Building : MonoBehaviour
         if (_buildingDemolishBtn != null)
         {
             _buildingDemolishBtn.gameObject.SetActive(true);
-        }
+        }       
     }
 
 

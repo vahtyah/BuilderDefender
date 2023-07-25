@@ -39,6 +39,29 @@ public class CameraHandler : MonoBehaviour
     {
         var x = Input.GetAxisRaw("Horizontal");
         var y = Input.GetAxisRaw("Vertical");
+
+        //edgeScrolling 
+        var edgeScrollingSize = 30f;
+        if (Input.mousePosition.x > Screen.width - edgeScrollingSize)
+        {
+            x = 1f;
+        }
+
+        if (Input.mousePosition.x < edgeScrollingSize)
+        {
+            x = -1f;
+        }
+
+        if (Input.mousePosition.y > Screen.height - edgeScrollingSize)
+        {
+            y = 1f;
+        }
+
+        if (Input.mousePosition.y < edgeScrollingSize)
+        {
+            y = -1f;
+        }
+
         var moveDir = new Vector3(x, y).normalized;
         transform.position += moveDir * (moveSpeed * Time.deltaTime);
     }
